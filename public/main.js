@@ -47,9 +47,14 @@ if (window.location.href.includes('signup.html')) {
        }
        
        axios.post("http://localhost:3000/user/login",details).then((res)=>{
+
+        
+        // console.log(user)
     
         alert(res.data.message)
-        window.location.href='expense.html'
+        const token=res.data.token
+        localStorage.setItem('token',token)
+        // window.location.href='expense.html'
         
        
          }).catch((err)=>{
@@ -93,17 +98,29 @@ if (window.location.href.includes('signup.html')) {
             axios.get('http://localhost:3000/expense/get-expenses').then((res)=>{
                 console.log(res.data)
                 for(let product of res.data){
-                    const li=document.createElement('li')
-                    li.innerHTML=`${product.amount} ${product.description} ${product.category}
-                    <button class="delete" id="${product.id}">Delete Product</button>`
-                    ul.appendChild(li)
-                }
-                   
+                    showOnScreen(product)
                     
+                }
     
             })
     
         }
+
+        function showOnScreen(product){
+            const li=document.createElement('li')
+                    li.innerHTML=`${product.amount} ${product.description} ${product.category}
+                    <button class="delete" onClick="deleteExpense(${product.id},event)">Delete Product</button>`
+                    ul.appendChild(li)
+
+        }
+        function deleteExpense(id,e){
+            axios.delete(`http://localhost:3000/expense/delete-expense/${id}`).then((res)=>{
+                console.log(res.data.message)
+                const li=e.target.parentElement
+                ul.removeChild(li)
+            })
+        }
+
     
     }
     
