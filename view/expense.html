@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>expenses</title>
+</head>
+<body>
+    <body>
+        <form id="expenseform">
+        Choose expenseamout:<input type="number" name="expense" id="amount">
+        Choose description: <input type="text" name="description" id="description">
+        Choose a category: <select name="category" id="category">
+            <option class="option" value="Gadgets">Gadgets</option>
+            <option class="option" value="Groceries">Groceries</option>
+            <option class="option" value="Travel">Travel</option>
+            </select>
+             <button>Add Expenses</button>
+         </form>
+             
+          <ul id="show">
+
+          </ul>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+        <script src="../public/main.js" ></script>
+    
+</body>
+</html>
