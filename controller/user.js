@@ -22,6 +22,7 @@ function isStringInvalid(string){
 exports.signUp=async(req,res,next)=>{
     try{
         const {name,email,password}=req.body
+        
         if(isStringInvalid(name) || isStringInvalid(email) || isStringInvalid(password)){
             return res.status(400).json({error:"something is missing"})
         }

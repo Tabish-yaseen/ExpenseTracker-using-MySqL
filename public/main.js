@@ -48,13 +48,10 @@ if (window.location.href.includes('signup.html')) {
        
        axios.post("http://localhost:3000/user/login",details).then((res)=>{
 
-        
-        // console.log(user)
-    
         alert(res.data.message)
         const token=res.data.token
         localStorage.setItem('token',token)
-        // window.location.href='expense.html'
+        window.location.href='expense.html'
         
        
          }).catch((err)=>{
@@ -83,8 +80,9 @@ if (window.location.href.includes('signup.html')) {
                 description:description.value,
                 category:category.value
             }
-            axios.post('http://localhost:3000/expense/add-expenses',details).then((res)=>{
-                getAllProducts()
+            const token=localStorage.getItem('token')
+            axios.post('http://localhost:3000/expense/add-expenses',details,{headers:{"Authorization":token}}).then((res)=>{
+                showOnScreen(res.data)
     
             })
     
@@ -94,11 +92,12 @@ if (window.location.href.includes('signup.html')) {
         })
     
         function getAllProducts(){
-            ul.innerHTML=""
-            axios.get('http://localhost:3000/expense/get-expenses').then((res)=>{
+            const token=localStorage.getItem('token')
+            // ul.innerHTML=""
+            axios.get('http://localhost:3000/expense/get-expenses',{headers:{"Authorization":token}}).then((res)=>{
                 console.log(res.data)
-                for(let product of res.data){
-                    showOnScreen(product)
+                for(let expense of res.data){
+                    showOnScreen(expense)
                     
                 }
     
@@ -106,15 +105,17 @@ if (window.location.href.includes('signup.html')) {
     
         }
 
-        function showOnScreen(product){
+        function showOnScreen(expense){
             const li=document.createElement('li')
-                    li.innerHTML=`${product.amount} ${product.description} ${product.category}
-                    <button class="delete" onClick="deleteExpense(${product.id},event)">Delete Product</button>`
+                    li.innerHTML=`${expense.amount} ${expense.description} ${expense.category}
+                    <button class="delete" onClick="deleteExpense(${expense.id},event)">Delete Product</button>`
                     ul.appendChild(li)
 
         }
+
         function deleteExpense(id,e){
-            axios.delete(`http://localhost:3000/expense/delete-expense/${id}`).then((res)=>{
+            const token=localStorage.getItem('token')
+            axios.delete(`http://localhost:3000/expense/delete-expense/${id}`,{headers:{"Authorization":token}}).then((res)=>{
                 console.log(res.data.message)
                 const li=e.target.parentElement
                 ul.removeChild(li)
