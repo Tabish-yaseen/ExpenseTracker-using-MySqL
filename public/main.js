@@ -50,7 +50,9 @@ if (window.location.href.includes('signup.html')) {
 
         alert(res.data.message)
         const token=res.data.token
+        const isPremium=res.data.isPremium
         localStorage.setItem('token',token)
+        localStorage.setItem('isPremium',isPremium)
         window.location.href='expense.html'
         
        
@@ -66,6 +68,18 @@ if (window.location.href.includes('signup.html')) {
     }
     // for expenses
     if (window.location.href.includes('expense.html')) {
+
+        const premiumButton=document.querySelector('#premium-button')
+        const premiumMessage = document.querySelector('#premium-message');
+
+        const isPremium=localStorage.getItem('isPremium')
+        console.log("helloo",isPremium)
+        if(isPremium==="true"){
+            premiumButton.style.display = "none";        
+             premiumMessage.style.display = "block";
+
+        }
+
         const expenseForm=document.querySelector('#expenseform')
         const ul=document.querySelector('#show')
     
@@ -121,6 +135,51 @@ if (window.location.href.includes('signup.html')) {
                 ul.removeChild(li)
             })
         }
+
+        
+
+
+        premiumButton.addEventListener('click',(e)=>{
+            const token=localStorage.getItem('token')
+            
+            axios.get('http://localhost:3000/purchase/premiummembership',{headers:{"Authorization":token}}).then((res)=>{
+                console.log(res)
+
+                const options = {
+                    "key": res.data.key_id,
+                    "order_id": res.data.order.id,
+                    "handler": async function (response) {
+                        try {
+                            // Send the payment details to the server to update the transaction status
+                            await axios.post('http://localhost:3000/purchase/updatetransactionstatus', {
+                                orderId: options.order_id,
+                                paymentId: response.razorpay_payment_id
+                            }, { headers: { "Authorization": token } });
+        
+                            
+                            alert('you are premium user now')
+
+                            premiumButton.style.display = "none";
+                    
+                           premiumMessage.style.display = "block";
+
+                        } catch (error) {
+                            // Handle any errors that occur during payment processing
+                            console.error('Payment failed:', error);
+                        }
+                    }
+                }
+                const rzp=new Razorpay(options)
+                rzp.open()
+                e.preventDefault()
+
+                rzp.on('payment.failed',function(response){
+                    alert('something went wrong')
+                })
+
+            })
+
+        })
 
     
     }
