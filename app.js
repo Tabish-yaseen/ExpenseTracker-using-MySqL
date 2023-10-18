@@ -5,6 +5,7 @@ const cors=require('cors')
 const userRoute=require('./routes/user')
 const expenseRoute=require('./routes/expense')
 const  purchaseRoute=require('./routes/purchase')
+const premiumRoute=require('./routes/premium')
 
 const sequelize=require('./util/database')
 
@@ -20,6 +21,7 @@ app.use(cors())
  app.use('/user',userRoute)
  app.use('/expense',expenseRoute)
  app.use('/purchase',purchaseRoute)
+ app.use('/premium',premiumRoute)
 
 
 user.hasMany(expense)

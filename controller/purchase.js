@@ -25,18 +25,26 @@ exports.purchasePremium = async (req, res) => {
 
     return res.status(201).json({ order: order, key_id: rzp.key_id });
   } catch (err) {
-    console.error(err);
+    // console.error(err);
     return res.status(500).json({ error: 'Failed to create order' });
   }
 };
+
 exports.updateTransaction=async(req,res)=>{
     try{
         const{orderId,paymentId}=req.body
         const user=req.user
       const order=  await  Order.findOne({where:{orderid:orderId}})
-    order.update({paymentid:paymentId,status:'successful'})
-    await user.update({isPremium:true})
-    res.status(200).json({success:true,message:"Transaction successful"})
+   const promise1=await order.update({paymentid:paymentId,status:'successful'})
+    const promise2=await user.update({isPremium:true})
+    Promise.all([promise1,promise2]).then(()=>{
+      res.status(200).json({success:true,message:"Transaction successful"})
+
+    }).catch((err)=>{
+      throw new Error(err)
+    })
+
+   
 
 
     }catch(err){

@@ -69,20 +69,37 @@ if (window.location.href.includes('signup.html')) {
     // for expenses
     if (window.location.href.includes('expense.html')) {
 
+        function parseJwt (token) {
+            var base64Url = token.split('.')[1];
+            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        
+            return JSON.parse(jsonPayload);
+        }
+
         const premiumButton=document.querySelector('#premium-button')
         const premiumMessage = document.querySelector('#premium-message');
 
-        const isPremium=localStorage.getItem('isPremium')
-        console.log("helloo",isPremium)
-        if(isPremium==="true"){
-            premiumButton.style.display = "none";        
-             premiumMessage.style.display = "block";
-
-        }
+        
 
         const expenseForm=document.querySelector('#expenseform')
         const ul=document.querySelector('#show')
-    
+
+        const token=localStorage.getItem('token')
+
+        const decodeToken=parseJwt(token)
+        let isPremium=decodeToken.isPremium
+
+
+        if(isPremium){
+            premiumButton.style.display = "none";        
+             premiumMessage.innerHTML = 'You Are a premium User';
+
+        }
+
+        
         expenseForm.addEventListener('submit',(e)=>{
             e.preventDefault()
             const  amount=document.querySelector('#amount')
@@ -161,7 +178,8 @@ if (window.location.href.includes('signup.html')) {
 
                             premiumButton.style.display = "none";
                     
-                           premiumMessage.style.display = "block";
+                            premiumMessage.innerHTML = 'You Are a premium User';
+
 
                         } catch (error) {
                             // Handle any errors that occur during payment processing
@@ -176,6 +194,25 @@ if (window.location.href.includes('signup.html')) {
                 rzp.on('payment.failed',function(response){
                     alert('something went wrong')
                 })
+
+            })
+
+        })
+
+        const leaderboard=document.querySelector('#leaderboard')
+        const showLeaderBoard=document.querySelector('#showleaderboard')
+        leaderboard.addEventListener('click',(e)=>{
+            axios.get('http://localhost:3000/premium/showleaderboard').then((res)=>{
+                showLeaderBoard.innerHTML=''
+                
+                for(let details of res.data){
+                    const li=document.createElement('li')
+                    li.innerHTML=`${details.name} ${details.totalcost}`
+                    showLeaderBoard.appendChild(li)
+
+
+                }
+
 
             })
 

@@ -17,14 +17,19 @@
             </select>
              <button>Add Expenses</button>
          </form>
+         <div id="premium-message"></div>
          <button id="premium-button">Buy Premium</button>
-         <p id="premium-message" style="display: none;">You are a premium member</p>
+         <button id="leaderboard">Show the leaderboard</button>
+         <!-- <p id="premium-message" style="display: none;">You are a premium member</p> -->
          <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
              
-          <ul id="show">
+          <ul id="showleaderboard">
 
           </ul>
+          <ul id="leaderboard"></ul>
+
+
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
         <script src="../public/main.js" ></script>
