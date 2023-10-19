@@ -44,8 +44,7 @@ exports.updateTransaction=async(req,res)=>{
       throw new Error(err)
     })
 
-   
-
+  
 
     }catch(err){
         res.status(500).json({error:err})

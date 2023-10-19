@@ -82,8 +82,6 @@ if (window.location.href.includes('signup.html')) {
         const premiumButton=document.querySelector('#premium-button')
         const premiumMessage = document.querySelector('#premium-message');
 
-        
-
         const expenseForm=document.querySelector('#expenseform')
         const ul=document.querySelector('#showexpenses')
 
@@ -137,6 +135,7 @@ if (window.location.href.includes('signup.html')) {
         }
 
         function showOnScreen(expense){
+            
             const li=document.createElement('li')
                     li.innerHTML=`${expense.amount} ${expense.description} ${expense.category}
                     <button class="delete" onClick="deleteExpense(${expense.id},event)">Delete Product</button>`
@@ -201,10 +200,16 @@ if (window.location.href.includes('signup.html')) {
 
         const leaderboard=document.querySelector('#leaderboard')
         const showLeaderBoard=document.querySelector('#showLeaderboard')
+        const errorMessage=document.querySelector('#expenseError')
+
         leaderboard.addEventListener('click',(e)=>{
             axios.get('http://localhost:3000/premium/showleaderboard').then((res)=>{
                 showLeaderBoard.innerHTML=''
-                
+
+                const heading = document.createElement('h2');
+                heading.innerHTML = 'Leaderboard';
+                showLeaderBoard.appendChild(heading);
+       
                 for(let details of res.data){
                     const li=document.createElement('li')
                     li.innerHTML=`Name-${details.name} TotalExpenses-${details.totalExpenses}`
@@ -213,6 +218,9 @@ if (window.location.href.includes('signup.html')) {
 
                 }
 
+
+            }).catch(err=>{
+                errorMessage.innerHTML = err.message;
 
             })
 
