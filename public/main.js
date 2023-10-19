@@ -85,7 +85,7 @@ if (window.location.href.includes('signup.html')) {
         
 
         const expenseForm=document.querySelector('#expenseform')
-        const ul=document.querySelector('#show')
+        const ul=document.querySelector('#showexpenses')
 
         const token=localStorage.getItem('token')
 
@@ -200,14 +200,14 @@ if (window.location.href.includes('signup.html')) {
         })
 
         const leaderboard=document.querySelector('#leaderboard')
-        const showLeaderBoard=document.querySelector('#showleaderboard')
+        const showLeaderBoard=document.querySelector('#showLeaderboard')
         leaderboard.addEventListener('click',(e)=>{
             axios.get('http://localhost:3000/premium/showleaderboard').then((res)=>{
                 showLeaderBoard.innerHTML=''
                 
                 for(let details of res.data){
                     const li=document.createElement('li')
-                    li.innerHTML=`${details.name} ${details.totalcost}`
+                    li.innerHTML=`Name-${details.name} TotalExpenses-${details.totalExpenses}`
                     showLeaderBoard.appendChild(li)
 
 

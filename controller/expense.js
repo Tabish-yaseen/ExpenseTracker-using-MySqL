@@ -1,4 +1,5 @@
 const Expense=require('../model/expense')
+const User=require('../model/user')
 
 function isStringNotValid(string){
     if(string===undefined || string.length===0){
@@ -17,9 +18,12 @@ exports.addExpenses=async(req,res)=>{
             return res.status(400).json({error:"something is missing"})
 
         }
-
+     
         const expense= await user.createExpense({amount,description,category})
-        // console.log(expense)
+         const totalAmount=Number(user.totalExpenses)+Number(amount)
+         await User.update({
+            totalExpenses:totalAmount},
+            {where:{id:user.id}})
         res.status(200).json(expense)
     }catch(err){
         res.status(500).json(err)

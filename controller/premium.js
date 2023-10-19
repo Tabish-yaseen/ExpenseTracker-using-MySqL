@@ -7,24 +7,12 @@ const sequelize = require('sequelize')
 exports.showLeaderBoard=async(req,res)=>{
     try{
         const showLeaderBoardOfUsers=await User.findAll({
-            attributes:['id','name',[sequelize.fn('sum',sequelize.col('amount')),'totalcost']],
-            include:[{
-                model:Expense,
-                attributes:[]
-            }],
-            group:['id'],
-            order:[[sequelize.literal('totalcost'), 'DESC']]
+             order:[[sequelize.literal('totalExpenses'), 'DESC']]
 
 
         })
        
-        // console.log("titli",showLeaderBoardOfUsers)
         res.status(200).json(showLeaderBoardOfUsers)
-
-       
-
-        
-        
 
     }catch(err){
         console.log(err)
