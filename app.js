@@ -13,10 +13,12 @@ const sequelize=require('./util/database')
 const user=require('./model/user')
 const expense=require('./model/expense')
 const order=require('./model/order')
+const forgotPasswordRequest=require('./model/forgotPasswordRequest')
 
 
 const app=express()
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 
  app.use('/user',userRoute)
@@ -31,6 +33,9 @@ expense.belongsTo(user)
 
 user.hasMany(order)
 order.belongsTo(user)
+
+user.hasMany(forgotPasswordRequest)
+forgotPasswordRequest.belongsTo(user)
 
 
 sequelize.sync({force:false}).then(()=>{
