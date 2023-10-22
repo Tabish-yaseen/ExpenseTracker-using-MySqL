@@ -1,6 +1,10 @@
+
 const Expense=require('../model/expense')
 const User=require('../model/user')
+
 const sequelize=require('../util/database')
+
+
 
 function isStringNotValid(string){
     if(string===undefined || string.length===0){
@@ -11,9 +15,12 @@ function isStringNotValid(string){
     }
 }
 
+
+
 exports.addExpenses=async(req,res)=>{
     const transaction= await sequelize.transaction()
     const user=req.user
+    
     try{
         const{amount,description,category}=req.body
         if(isStringNotValid(amount) || isStringNotValid(description) || isStringNotValid(category)){
@@ -40,9 +47,10 @@ exports.addExpenses=async(req,res)=>{
 
 exports.getExpenses=async (req,res)=>{
     try{
+        
         const user=req.user
         const expenses= await user.getExpenses()
-        console.log(expenses)
+        // console.log(expenses)
         res.status(202).json(expenses)
 
     }catch(err){

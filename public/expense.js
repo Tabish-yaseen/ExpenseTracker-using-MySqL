@@ -46,9 +46,12 @@
         premiumButton.style.display = "none";        
          premiumMessage.innerHTML = 'You Are a premium User';
          showLeaderBoard()
+         download()
+         showURLS()
 
     }
         getAllProducts()
+        
     })
 
     function getAllProducts(){
@@ -83,8 +86,6 @@
         })
     }
 
-    
-
 
     premiumButton.addEventListener('click',(e)=>{
         const token=localStorage.getItem('token')
@@ -110,6 +111,8 @@
                         premiumMessage.innerHTML = 'You Are a premium User';
                         localStorage.setItem('token',res.data.token)
                         showLeaderBoard()
+                        download()
+
 
 
                     } catch (error) {
@@ -131,6 +134,7 @@
     })
 
     function showLeaderBoard(e){
+        
         const button=document.createElement("button")
         button.textContent="Show Leaderboard"
         button.addEventListener('click',()=>{
@@ -159,4 +163,50 @@
         document.querySelector('#Leaderboard').appendChild(button)
 
 
+    }
+    
+    function download(){
+        const showDownloadButton=document.querySelector('#showdownloadbutton')
+        const downloadButton=document.createElement('button')
+        downloadButton.textContent='Download Expense'
+        downloadButton.addEventListener('click',()=>{
+            const token=localStorage.getItem('token')
+        axios.get("http://localhost:3000/expense/downloadExpenses",{headers:{"Authorization":token}}).then((res)=>{
+            console.log(res.data.fileURL)
+            if(res.status===200){
+                const a=document.createElement('a')
+            a.href=res.data.fileURL
+            a.download='myexpense.csv'
+            a.click() 
+            showURLS()
+              
+            }else{
+                throw new Error(res.data.message)
+            }
+   
+        }).catch((err)=>{
+            errorMessage.innerHTML = err.message;
+        })
+
+        })
+        showDownloadButton.appendChild(downloadButton)
+        
+    }
+    function showURLS(){
+            const urls=document.querySelector('#showurls')
+            urls.textContent=""
+        const token=localStorage.getItem('token')
+        axios.get('http://localhost:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
+            const downloadedFiles=res.data.downloadedFiles
+            console.log(downloadedFiles)
+            for(let file of downloadedFiles){
+                const a=document.createElement('a')
+                a.href=file.URL
+                a.innerHTML=`Expenses downloaded at${file.date},click here to download it again <br>`
+                urls.appendChild(a)
+                
+            }
+
+        })
+        
     }
