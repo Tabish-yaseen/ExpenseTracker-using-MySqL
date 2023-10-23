@@ -46,17 +46,41 @@ exports.addExpenses=async(req,res)=>{
 }
 
 exports.getExpenses=async (req,res)=>{
-    try{
+    try {
+        const page = Number(req.query.page) || 1;
+        const itemsPerPage = 2;
+    
+        const user = req.user;
         
-        const user=req.user
-        const expenses= await user.getExpenses()
-        // console.log(expenses)
-        res.status(202).json(expenses)
+    
+        const expenses = await user.getExpenses({
+          offset:(page - 1) * itemsPerPage,
+          limit: itemsPerPage
+        });
+    
+        // total count of expenses of the user
+        const totalCount = await user.countExpenses();
+    
+        const lastPage = Math.ceil(totalCount / itemsPerPage);
+    
+        res.status(200).json({
+          expenses:expenses,
+          pagination:{
+            currentPage: page,
+            hasNextPage: page < lastPage,
+            nextPage: page + 1,
+            hasPreviousPage: page > 1,
+            previousPage: page - 1,
+            lastPage:lastPage
 
-    }catch(err){
-        res.status(500).json({error: 'Failed to retrieve expenses'})
+          }
+          
+        });
+      } catch (err) {
+        res.status(500).json({ error: 'Failed to retrieve expenses' });
+      }
     }
-}
+
 
 exports.deleteExpense=async(req,res)=>{
     const transaction = await sequelize.transaction();

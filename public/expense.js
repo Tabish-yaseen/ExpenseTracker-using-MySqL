@@ -36,6 +36,7 @@
 
     })
     window.addEventListener('DOMContentLoaded',()=>{
+
     const token=localStorage.getItem('token')
 
     const decodeToken=parseJwt(token)
@@ -50,26 +51,60 @@
          showURLS()
 
     }
-        getAllProducts()
+        getAllProducts(1)
         
     })
 
-    function getAllProducts(){
+    function getAllProducts(page){
         const token=localStorage.getItem('token')
-        // ul.innerHTML=""
-        axios.get('http://localhost:3000/expense/get-expenses',{headers:{"Authorization":token}}).then((res)=>{
-            console.log(res.data)
-            for(let expense of res.data){
+        ul.innerHTML=""
+        axios.get(`http://localhost:3000/expense/get-expenses?page=${page}`,{headers:{"Authorization":token}}).then((res)=>{
+            const expenses=res.data.expenses
+            const pagination=res.data.pagination
+            
+            for(let expense of expenses){
                 showOnScreen(expense)
                 
+                
             }
+            showPagination(pagination)
 
         })
 
     }
+    function showPagination(pagination) {
+        const{currentPage,hasNextPage,nextPage,hasPreviousPage,previousPage,lastPage}=pagination 
+        const paginationDiv = document.querySelector('#pagination-button');
+        paginationDiv.innerHTML = '';
+      
+        // Function to create a button element and add an event listener
+        function createPageButton(pageNumber) {
+          const btn = document.createElement('button');
+          btn.innerHTML = pageNumber;
+          btn.addEventListener('click', () => {
+            getAllProducts(pageNumber);
+          });
+          return btn;
+        }
+      
+        if (hasPreviousPage) {
+            const  btn1=createPageButton(previousPage)
+             paginationDiv.appendChild(btn1);
+        }
+        if(currentPage){
+            const btn2=createPageButton(currentPage)
+            paginationDiv.appendChild(btn2);
 
-    function showOnScreen(expense){
-        
+        }
+        if (hasNextPage) {
+            const btn3=createPageButton(nextPage)
+            paginationDiv.appendChild(btn3);
+        }
+      
+        if(lastPage)
+        paginationDiv.appendChild(createPageButton(lastPage));
+      }
+    function showOnScreen(expense){   
         const li=document.createElement('li')
                 li.innerHTML=`${expense.amount} ${expense.description} ${expense.category}
                 <button class="delete" onClick="deleteExpense(${expense.id},event)">Delete Product</button>`
