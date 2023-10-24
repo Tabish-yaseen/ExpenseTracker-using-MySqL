@@ -16,7 +16,6 @@ loginForm.addEventListener('submit',(e)=>{
     const token=res.data.token
     const isPremium=res.data.isPremium
     localStorage.setItem('token',token)
-    localStorage.setItem('isPremium',isPremium)
     window.location.href='expense.html'
     
    

@@ -51,14 +51,38 @@
          showURLS()
 
     }
-        getAllProducts(1)
+    const expensesPerPage=document.querySelector('#rows')
+
+    const selectedLimit=localStorage.getItem('expensesPerPage')
+    const page=1
+
+    if(selectedLimit){ 
+        expensesPerPage.value=selectedLimit
+        getAllProducts(page,selectedLimit)
+    }
+    else{
+        getAllProducts(page,expensesPerPage.value)
+    }
+        
         
     })
 
-    function getAllProducts(page){
+    const expensesPerPage=document.querySelector('#rows')
+    
+    expensesPerPage.addEventListener('change',()=>{
+        const limit=expensesPerPage.value
+        localStorage.setItem('expensesPerPage', limit)
+        const page=1
+        getAllProducts(page,limit)
+
+    })
+    
+
+
+    function getAllProducts(page,limit){
         const token=localStorage.getItem('token')
         ul.innerHTML=""
-        axios.get(`http://localhost:3000/expense/get-expenses?page=${page}`,{headers:{"Authorization":token}}).then((res)=>{
+        axios.get(`http://localhost:3000/expense/get-expenses?page=${page}&expensePerPage=${limit}`,{headers:{"Authorization":token}}).then((res)=>{
             const expenses=res.data.expenses
             const pagination=res.data.pagination
             
@@ -82,7 +106,8 @@
           const btn = document.createElement('button');
           btn.innerHTML = pageNumber;
           btn.addEventListener('click', () => {
-            getAllProducts(pageNumber);
+            const selectedLimit=localStorage.getItem('expensesPerPage')
+            getAllProducts(pageNumber,selectedLimit);
           });
           return btn;
         }
@@ -91,7 +116,7 @@
             const  btn1=createPageButton(previousPage)
              paginationDiv.appendChild(btn1);
         }
-        if(currentPage){
+        if(currentPage!=lastPage){
             const btn2=createPageButton(currentPage)
             paginationDiv.appendChild(btn2);
 

@@ -48,7 +48,8 @@ exports.addExpenses=async(req,res)=>{
 exports.getExpenses=async (req,res)=>{
     try {
         const page = Number(req.query.page) || 1;
-        const itemsPerPage = 2;
+        const itemsPerPage= Number(req.query.expensePerPage);
+        console.log(itemsPerPage)
     
         const user = req.user;
         
@@ -67,7 +68,7 @@ exports.getExpenses=async (req,res)=>{
           expenses:expenses,
           pagination:{
             currentPage: page,
-            hasNextPage: page < lastPage,
+            hasNextPage: page < lastPage-1,
             nextPage: page + 1,
             hasPreviousPage: page > 1,
             previousPage: page - 1,
