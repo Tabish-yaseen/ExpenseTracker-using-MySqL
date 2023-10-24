@@ -9,8 +9,6 @@
     const useremail=document.querySelector('.useremail')
     const userpassword=document.querySelector('.userpassword')
     
-    
-    
         const details={
             name:username.value,
             email:useremail.value,

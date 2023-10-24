@@ -26,7 +26,6 @@ exports.downloadExpenses=async(req,res)=>{
 }
 exports.getURLS=async(req,res)=>{
     try{
-        console.log("hellooooooooooooooo")
         const user=req.user
         // console.log(user)
         const downloadedFiles=await  filesDownloaded.findAll({where:{userId:user.id}})
