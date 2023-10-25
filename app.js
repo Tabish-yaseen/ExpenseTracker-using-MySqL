@@ -1,54 +1,56 @@
-const express=require('express')
-const bodyParser=require('body-parser')
-const cors=require('cors')
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path');
 
-//routes imported
-const userRoute=require('./routes/user')
-const expenseRoute=require('./routes/expense')
-const  purchaseRoute=require('./routes/purchase')
-const premiumRoute=require('./routes/premium')
-const passwordRoute=require('./routes/password')
+// Routes imported
+const userRoute = require('./routes/user');
+const expenseRoute = require('./routes/expense');
+const purchaseRoute = require('./routes/purchase');
+const premiumRoute = require('./routes/premium');
+const passwordRoute = require('./routes/password');
 
-const sequelize=require('./util/database')
+const sequelize = require('./util/database');
 
-// modals imported
-const user=require('./model/user')
-const expense=require('./model/expense')
-const order=require('./model/order')
-const forgotPasswordRequest=require('./model/forgotPasswordRequest')
-const  filesDownloaded=require('./model/filesDownloaded')
+// Models imported
+const User = require('./model/user');
+const Expense = require('./model/expense');
+const Order = require('./model/order');
+const ForgotPasswordRequest = require('./model/forgotPasswordRequest');
+const FilesDownloaded = require('./model/filesDownloaded');
 
+const app = express();
 
-const app=express()
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(cors())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
- app.use('/user',userRoute)
- app.use('/expense',expenseRoute)
- app.use('/purchase',purchaseRoute)
- app.use('/premium',premiumRoute)
- app.use('/password',passwordRoute)
+app.use('/user', userRoute);
+app.use('/expense', expenseRoute);
+app.use('/purchase', purchaseRoute);
+app.use('/premium', premiumRoute);
+app.use('/password', passwordRoute);
 
-//relations
-user.hasMany(expense)
-expense.belongsTo(user)
+app.use((req, res) => {
+    console.log(req.url)
+    res.sendFile(path.join(__dirname, `public/${req.url}` ));
+});
 
-user.hasMany(order)
-order.belongsTo(user)
+// Relations
+User.hasMany(Expense);
+Expense.belongsTo(User);
 
-user.hasMany(forgotPasswordRequest)
-forgotPasswordRequest.belongsTo(user)
+User.hasMany(Order);
+Order.belongsTo(User);
 
-user.hasMany(filesDownloaded)
-filesDownloaded.belongsTo(user)
+User.hasMany(ForgotPasswordRequest);
+ForgotPasswordRequest.belongsTo(User);
 
+User.hasMany(FilesDownloaded);
+FilesDownloaded.belongsTo(User);
 
-sequelize.sync({force:false}).then(()=>{
-    app.listen(3000)
-
-})
-
-
- 
- 
+sequelize.sync({ force: false }).then(() => {
+    app.listen(3000, () => {
+        console.log('Server is running on port 3000');
+    });
+});

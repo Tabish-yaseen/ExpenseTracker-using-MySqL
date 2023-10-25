@@ -29,7 +29,7 @@
             category:category.value
         }
         const token=localStorage.getItem('token')
-        axios.post('http://localhost:3000/expense/add-expenses',details,{headers:{"Authorization":token}}).then((res)=>{
+        axios.post('http://13.48.13.224:3000/expense/add-expenses',details,{headers:{"Authorization":token}}).then((res)=>{
             showOnScreen(res.data)
 
         })
@@ -82,7 +82,7 @@
     function getAllProducts(page,limit){
         const token=localStorage.getItem('token')
         ul.innerHTML=""
-        axios.get(`http://localhost:3000/expense/get-expenses?page=${page}&expensePerPage=${limit}`,{headers:{"Authorization":token}}).then((res)=>{
+        axios.get(`http://13.48.13.224:3000/expense/get-expenses?page=${page}&expensePerPage=${limit}`,{headers:{"Authorization":token}}).then((res)=>{
             const expenses=res.data.expenses
             const pagination=res.data.pagination
             
@@ -139,7 +139,7 @@
 
     function deleteExpense(id,e){
         const token=localStorage.getItem('token')
-        axios.delete(`http://localhost:3000/expense/delete-expense/${id}`,{headers:{"Authorization":token}}).then((res)=>{
+        axios.delete(`http://13.48.13.224:3000/expense/delete-expense/${id}`,{headers:{"Authorization":token}}).then((res)=>{
             console.log(res.data.message)
             const li=e.target.parentElement
             ul.removeChild(li)
@@ -150,7 +150,7 @@
     premiumButton.addEventListener('click',(e)=>{
         const token=localStorage.getItem('token')
         
-        axios.get('http://localhost:3000/purchase/premiummembership',{headers:{"Authorization":token}}).then((res)=>{
+        axios.get('http://13.48.13.224:3000/purchase/premiummembership',{headers:{"Authorization":token}}).then((res)=>{
             console.log(res)
 
             const options = {
@@ -159,7 +159,7 @@
                 "handler": async function (response) {
                     try {
                         // Send the payment details to the server to update the transaction status
-                       const res= await axios.post('http://localhost:3000/purchase/updatetransactionstatus', {
+                       const res= await axios.post('http://13.48.13.224:3000/purchase/updatetransactionstatus', {
                             orderId: options.order_id,
                             paymentId: response.razorpay_payment_id
                         }, { headers: { "Authorization": token } });
@@ -201,7 +201,7 @@
             const showLeaderBoard=document.querySelector('#showLeaderboard')
             const errorMessage=document.querySelector('#expenseError')
 
-        axios.get('http://localhost:3000/premium/showleaderboard').then((res)=>{
+        axios.get('http://13.48.13.224:3000/premium/showleaderboard').then((res)=>{
             showLeaderBoard.innerHTML=''
 
             const heading = document.createElement('h2');
@@ -231,7 +231,7 @@
         downloadButton.textContent='Download Expense'
         downloadButton.addEventListener('click',()=>{
             const token=localStorage.getItem('token')
-        axios.get("http://localhost:3000/expense/downloadExpenses",{headers:{"Authorization":token}}).then((res)=>{
+        axios.get("http://13.48.13.224:3000/expense/downloadExpenses",{headers:{"Authorization":token}}).then((res)=>{
             console.log(res.data.fileURL)
             if(res.status===200){
                 const a=document.createElement('a')
@@ -256,7 +256,7 @@
             const urls=document.querySelector('#showurls')
             urls.textContent=""
         const token=localStorage.getItem('token')
-        axios.get('http://localhost:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
+        axios.get('http://13.48.13.224:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
             const downloadedFiles=res.data.downloadedFiles
             console.log(downloadedFiles)
             for(let file of downloadedFiles){

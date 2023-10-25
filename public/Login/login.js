@@ -10,14 +10,14 @@ loginForm.addEventListener('submit',(e)=>{
     userpassword:password.value
    }
    
-   axios.post("http://localhost:3000/user/login",details).then((res)=>{
+   axios.post("http://13.48.13.224:3000/user/login",details).then((res)=>{
 
     alert(res.data.message)
     const token=res.data.token
-    const isPremium=res.data.isPremium
+    // const isPremium=res.data.isPremium
     localStorage.setItem('token',token)
-    window.location.href='expense.html'
-    
+    window.location.href = '../Expense/expense.html';
+
    
      }).catch((err)=>{
     

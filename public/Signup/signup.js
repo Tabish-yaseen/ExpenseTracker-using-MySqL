@@ -15,10 +15,10 @@
             password:userpassword.value
     
         }
-        axios.post('http://localhost:3000/user/signup',details).then((res)=>{
+        axios.post('http://13.48.13.224:3000/user/signup',details).then((res)=>{
             console.log("hurr",res)
     
-            window.location.href = 'login.html';
+            window.location.href = '../Login/login.html';
             
             
         }).catch((err)=>{
