@@ -15,7 +15,7 @@
             password:userpassword.value
     
         }
-        axios.post('http://13.48.13.224:3000/user/signup',details).then((res)=>{
+        axios.post('http://51.20.75.252:3000/user/signup',details).then((res)=>{
             console.log("hurr",res)
     
             window.location.href = '../Login/login.html';

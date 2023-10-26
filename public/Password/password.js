@@ -4,7 +4,7 @@ const message=document.querySelector("#message")
      e.preventDefault()
      const email=document.querySelector('.email').value
      console.log(email)
-    axios.get(`http://13.48.13.224:3000/password/forgotpassword/${email}`).then((res)=>{
+    axios.get(`http://51.20.75.252:3000/password/forgotpassword/${email}`).then((res)=>{
         forgotPasswordForm.reset()
         message.innerHTML=res.data.message
     })
