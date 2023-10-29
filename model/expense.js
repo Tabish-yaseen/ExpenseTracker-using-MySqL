@@ -8,6 +8,16 @@ const expense=sequelize.define('expense',{
         allowNull:false,
         autoIncrement:true
     },
+    day:{
+        type:DataTypes.INTEGER
+    },
+    month:{
+        type:DataTypes.INTEGER
+    },
+    year:{
+        type:DataTypes.INTEGER
+
+    },
     amount:{
         type:DataTypes.INTEGER,
         allowNull:false

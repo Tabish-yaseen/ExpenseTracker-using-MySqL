@@ -6,42 +6,73 @@
     <title>expenses</title>
 </head>
 <body>
-    <body>
+    <button id="home">Home</button>
+    <button id="leaderboardbtn">Leaderboard</button>
+    <button id="report">Report</button>
+
+    <span id="premium-message"></span>
+    <button id="premium-button" >Buy Premium</button>
+
+    <button id="download">Download Expenses</button>
+   
+    <button id="logout">Logout</button>
+    <button id="showdownloads">Download History</button>
+
         <form id="expenseform">
         Choose expenseamout:<input type="number" name="expense" id="amount">
         Choose description: <input type="text" name="description" id="description">
         Choose a category: <select name="category" id="category">
             <option class="option" value="Gadgets">Gadgets</option>
             <option class="option" value="Groceries">Groceries</option>
-            <option class="option" value="Travel">Travel</option>
+            <option class="option" value="Healthcare">Healthcare</option>
+            <option class="option" value="Entertainment">Entertainment</option>
+            <option class="option" value="Shopping">Shopping</option>
+            <option class="option" value="Education">Education</option>
+            <option class="option" value="Utilities">Utilities</option>
+            <option class="option" value="Insurance">Insurance</option>
+            <option class="option" value="Gifts">Gifts</option>
+            <option class="option" value="Electronics">Electronics</option>
+            <option class="option" value="Hair/Beauty">Hair/Beauty</option>
+            <option class="option" value="Transportation">Transportation</option>
+            <option class="option" value="Other">Other</option>
+
             </select>
              <button>Add Expenses</button>
          </form>
-         <div id="premium-message"></div>
-         <button id="premium-button">Buy Premium</button>
-         <div id="showdownloadbutton"></div>
-         
-         <div id="Leaderboard"></div>
+
+
          <div id="expenseError"></div><br>
+
          <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
            
             <label for="rows">Rows per Page</label>
             <select name="rows" id="rows">
-                <option value="2">2</option>
-                <option value="4">4</option>
-                <option value="6">6</option>
-                <option value="8">8</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
             </select>
-        
-          <ul id="showexpenses"></ul>
-          <div id="pagination-button"></div>
-          <ul id="showLeaderboard"></ul>
+      <!-- // table for displaying the expenses -->
+            <table>
+                <thead>
+                     <th>Date</th> 
+                     <th>category</th>
+                    <th>Description</th>
+                    <th>Amount</th>
+                </thead>
+                <tbody id="tbody"> 
+
+                </tbody>
+            </table>
+
+            <div id="pagination-button"></div> <br>
+            <div id="showdownloadbutton"></div>
+           
+
           <ul id="showurls"></ul>
 
 
-
-        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
         <script src="expense.js" ></script>
     

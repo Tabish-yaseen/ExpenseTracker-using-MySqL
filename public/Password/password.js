@@ -6,8 +6,7 @@ const message=document.querySelector("#message")
      console.log(email)
     axios.get(`http://51.20.75.252:3000/password/forgotpassword/${email}`).then((res)=>{
         forgotPasswordForm.reset()
-        message.innerHTML=res.data.message
+        alert(res.data.message)
+        window.location.href='../Login/login.html'
     })
-
-
         })

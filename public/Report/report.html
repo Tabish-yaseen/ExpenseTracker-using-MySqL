@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>view details</title>
+</head>
+<body>
+    <a href="../Expense/expense.html">Home</a>
+    <a href="../Leaderboard/leaderboard.html">Leaderboard</a>
+    <a href="../Report/report.html">Report</a>
+
+    <h2>Day to Day Expenses</h2>
+    <h5>Select Date</h5>
+    <input type="date" id="day" name="day">
+    <button id="dayshowbtn">Show</button>
+    <table>
+        <thead>
+            <tr>
+               <th>Date</th> 
+               <th>Description</th>
+               <th>Category</th>
+               <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody id="dayexpenses">
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><span id="totalAmount">0</span></td>
+            </tr>
+        </tfoot>
+        
+    </table>
+    
+
+    <br>
+    <h2>Monthly Expenses</h2>
+    <h5>Select Month</h5>
+    <input type="month" id="month" name="month">
+    <button id="monthshowbtn">Show</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th> 
+               <th>Description</th>
+               <th>Category</th>
+               <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody id="monthlyexpenses">
+            
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2"></td>
+                <td>Total</td>
+                <td><span id="monthTotalAmount">0</span></td>
+            </tr>
+        
+        
+    </table>
+    <br>
+    <!-- <h2>Notes Report 2021</h2> -->
+
+    <!-- <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Notes</th>
+    
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>11-02-2023</td>
+                <td>Gave an advance to construction</td>
+            </tr>
+            <tr>
+                <td>16-02-2023</td>
+                <td>paid house rent</td>
+            </tr>
+            <tr>
+                <td>17-02-2023</td>
+                <td>recieved a salary</td>
+            </tr>
+            <tr>
+                <td>10-02-2023</td>
+                <td>paid scool fee</td>
+            </tr>
+           
+        
+        </tbody>
+        
+    </table>
+
+    
+</body> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    <script src="report.js"></script>
+</html>

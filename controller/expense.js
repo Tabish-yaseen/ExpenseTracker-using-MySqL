@@ -27,8 +27,16 @@ exports.addExpenses=async(req,res)=>{
             return res.status(400).json({error:"something is missing"})
 
         }
+        const currentDate=new Date()
+        const day=currentDate.getDate()
+        const month=currentDate.getMonth()+1
+        const year=currentDate.getFullYear()
+        console.log(day)
+        console.log(month)
+        console.log(year)
+    
      
-        const expense= await user.createExpense({amount,description,category},{transaction:transaction})
+        const expense= await user.createExpense({day,month,year,amount,description,category},{transaction:transaction})
          const totalAmount=Number(user.totalExpenses)+Number(amount)
          await User.update({
             totalExpenses:totalAmount
@@ -112,4 +120,38 @@ exports.deleteExpense=async(req,res)=>{
         res.status(500).json({error:err})
     }
 
+}
+exports.getDayExpenses = async (req, res) => {
+    try {
+        const { day, month, year } = req.query;
+        const user = req.user;
+        const dayExpenses = await user.getExpenses({ where: { day: day, month: month, year: year } });
+        
+        let totalAmount = 0;
+        for (let expense of dayExpenses) {
+            totalAmount += expense.amount;
+        }
+
+        res.status(200).json({ expenses: dayExpenses, totalAmount: totalAmount });
+    } catch (err) {
+        res.status(500).json({ error: err });
+    }
+}
+exports.getMonthExpenses=async(req,res)=>{
+    try{
+        const{month,year}=req.query;
+        const user=req.user;
+        const monthExpenses=await user.getExpenses({where:{month:month,year:year}})
+        console.log(monthExpenses)
+
+        let totalAmount=0
+        for(let expense of monthExpenses){
+            totalAmount+=expense.amount
+        }
+        console.log(totalAmount)
+        res.status(200).json({expenses:monthExpenses,totalAmount:totalAmount})
+
+    }catch (err) {
+        res.status(500).json({ error: err });
+    }
 }
