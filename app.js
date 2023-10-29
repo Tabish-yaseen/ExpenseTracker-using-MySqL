@@ -50,7 +50,7 @@ ForgotPasswordRequest.belongsTo(User);
 User.hasMany(FilesDownloaded);
 FilesDownloaded.belongsTo(User);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: true }).then(() => {
     app.listen(3000, () => {
         console.log('Server is running on port 3000');
     });
