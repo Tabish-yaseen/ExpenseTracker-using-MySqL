@@ -98,7 +98,7 @@ let isPremium=checkPremium()
 if(isPremium){
     premiumButton.style.display = "none";        
      premiumMessage.innerHTML = 'Premium Member';
-    //  showURLS()
+
 
 }
 
@@ -276,7 +276,6 @@ download.addEventListener('click',()=>{
             a.href=res.data.fileURL
             a.download='myexpense.csv'
             a.click() 
-            // showURLS()
               
             }else{
                 throw new Error(res.data.message)
@@ -289,28 +288,3 @@ download.addEventListener('click',()=>{
         })
 
 
-
-
-// function displaying the download urls
-// function showURLS(){
-//         const urls=document.querySelector('#showurls')
-//         urls.textContent=""
-//     const token=localStorage.getItem('token')
-//     axios.get('http://51.20.75.252:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
-//         const h1=document.createElement('h1')
-//         h1.textContent='Pevious Downloads'
-//         urls.appendChild(h1)
-//         const downloadedFiles=res.data.downloadedFiles
-//         for(let file of downloadedFiles){
-//             const date = new Date(file.date);
-//             const formattedDate = date.toISOString().split("T")[0]
-//             const a=document.createElement('a')
-//             a.href=file.URL
-//             a.innerHTML=`Expenses Downloaded At ${formattedDate},  Click Here To Download It Again <br><br>`
-//             urls.appendChild(a)
-            
-//         }
-
-//     })
-    
-// }
