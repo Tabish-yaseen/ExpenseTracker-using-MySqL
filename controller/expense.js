@@ -31,12 +31,9 @@ exports.addExpenses=async(req,res)=>{
         const day=currentDate.getDate()
         const month=currentDate.getMonth()+1
         const year=currentDate.getFullYear()
-        console.log(day)
-        console.log(month)
-        console.log(year)
-    
      
         const expense= await user.createExpense({day,month,year,amount,description,category},{transaction:transaction})
+
          const totalAmount=Number(user.totalExpenses)+Number(amount)
          await User.update({
             totalExpenses:totalAmount
@@ -57,7 +54,7 @@ exports.getExpenses=async (req,res)=>{
     try {
         const page = Number(req.query.page) || 1;
         const itemsPerPage= Number(req.query.expensePerPage);
-        console.log(itemsPerPage)
+        // console.log(itemsPerPage)
     
         const user = req.user;
         
@@ -126,6 +123,10 @@ exports.getDayExpenses = async (req, res) => {
         const { day, month, year } = req.query;
         const user = req.user;
         const dayExpenses = await user.getExpenses({ where: { day: day, month: month, year: year } });
+        if(dayExpenses.length==0){
+         return res.status(400).json({error:"No Expenses Of This Day"})
+        }
+        
         
         let totalAmount = 0;
         for (let expense of dayExpenses) {
@@ -142,7 +143,9 @@ exports.getMonthExpenses=async(req,res)=>{
         const{month,year}=req.query;
         const user=req.user;
         const monthExpenses=await user.getExpenses({where:{month:month,year:year}})
-        console.log(monthExpenses)
+        if(monthExpenses.length==0){
+            return res.status(400).json({error:"No Expenses Of This Month"})
+           }
 
         let totalAmount=0
         for(let expense of monthExpenses){

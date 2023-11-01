@@ -9,12 +9,13 @@ exports.forgotPassword = async (req, res) => {
   try {
     const userEmail = req.params.email;
     const user = await User.findOne({ where: { email: userEmail } });
+
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
     const uuid = uuidv4();
-    console.log(uuid);
+    // console.log(uuid);
 
     await forgotPassword.create({
       userId: user.id,
@@ -44,12 +45,12 @@ exports.forgotPassword = async (req, res) => {
       sender,
       to: receiver,
       subject: "Password Reset",
-      textContent: `<a href="http://51.20.75.252:3000/password/resetpassword/${uuid}">Reset password</a>`,
+      textContent: `<a href="http://51.20.75.252:3000/password/resetpassword/${uuid}">Click To Reset password</a>`,
     });
 
-    res.status(200).json({ message: 'Link to reset password sent to your mail' });
+    res.status(200).json({ message: 'Link to reset password has been sent to your mail' });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(505).json({ error: err.message });
   }
 };
 
@@ -75,8 +76,8 @@ exports.resetPassword = async (req, res) => {
       res.status(404).send('Password reset link is invalid or has already been used');
     }
   } catch (err) {
-    console.log(err);
-    res.status(500).send('Internal Server Error');
+    console.log(err)
+    res.status(500).send('Internal Server Error')
   }
 };
 exports.updatePassword=async(req,res)=>{

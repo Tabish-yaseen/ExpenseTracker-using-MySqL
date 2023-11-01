@@ -16,7 +16,6 @@
     
         }
         axios.post('http://51.20.75.252:3000/user/signup',details).then((res)=>{
-            console.log("hurr",res)
     
             window.location.href = '../Login/login.html';
             

@@ -50,9 +50,18 @@ expenseForm.addEventListener('submit',(e)=>{
         expenseForm.reset()
         showOnScreen(res.data)
 
-    })
+    }) 
 
 })
+
+// checking for premium
+function checkPremium(){
+    const token=localStorage.getItem('token')
+    const decodeToken=parseJwt(token)
+    let isPremium=decodeToken.isPremium
+    return isPremium
+
+}
 
 //leaderboard button which will redirect to leaderboard page if premium or show alert incase not premium
 const leaderboardbtn=document.querySelector('#leaderboardbtn')
@@ -82,16 +91,6 @@ report.addEventListener('click',()=>{
     
 
 })
-
-// checking for premium
-function checkPremium(){
-    const token=localStorage.getItem('token')
-    const decodeToken=parseJwt(token)
-    let isPremium=decodeToken.isPremium
-    return isPremium
-
-}
-
 
 window.addEventListener('DOMContentLoaded',()=>{
 let isPremium=checkPremium()
@@ -131,7 +130,7 @@ expensesPerPage.addEventListener('change',()=>{
 
 })
 
-
+// function for getting all the expenses of authenticated user
 function getAllProducts(page,limit){
     const token=localStorage.getItem('token')
     tbody.innerHTML=""
@@ -223,8 +222,7 @@ premiumButton.addEventListener('click',(e)=>{
     const token=localStorage.getItem('token')
     
     axios.get('http://51.20.75.252:3000/purchase/premiummembership',{headers:{"Authorization":token}}).then((res)=>{
-        console.log(res)
-
+        // console.log(res)
         const options = {
             "key": res.data.key_id,
             "order_id": res.data.order.id,
@@ -243,9 +241,7 @@ premiumButton.addEventListener('click',(e)=>{
 
                     premiumButton.style.display = "none";
             
-                    premiumMessage.innerHTML = 'Premium Member';
-                  
-                    download()
+                    premiumMessage.innerHTML = 'Premium Member';               
 
                 } catch (error) {
                     // Handle any errors that occur during payment processing

@@ -41,8 +41,12 @@ exports.updateTransaction=async(req,res)=>{
         const{orderId,paymentId}=req.body
         const user=req.user
       const order=  await  Order.findOne({where:{orderid:orderId}})
-   const promise1=await order.update({paymentid:paymentId,status:'successful'})
-    const promise2=await user.update({isPremium:true})
+
+      if (!order) {
+        return res.status(404).json({ success: false, message: 'Order not found' });
+    }
+   const promise1= order.update({paymentid:paymentId,status:'successful'})
+    const promise2= user.update({isPremium:true})
     Promise.all([promise1,promise2]).then(()=>{
       res.status(200).json({success:true,message:"Transaction successful",token:generateAccessToken(user.id,undefined,true)})
 
