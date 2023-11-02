@@ -1,7 +1,7 @@
 
    const token=localStorage.getItem('token')
    let sno=1
-  axios.get('http://localhost:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
+  axios.get('http://51.20.75.252:3000/expense/getdownloadedURLS',{headers:{"Authorization":token}}).then((res)=>{
     const downloadedFiles=res.data.downloadedFiles
     for(let file of downloadedFiles){
         const tbody=document.querySelector('#tbody')

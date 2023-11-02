@@ -3,7 +3,7 @@ const forgotPasswordForm=document.querySelector("#forgotpasswordform")
      e.preventDefault()
      const email=document.querySelector('.email').value
      
-    axios.get(`http://localhost:3000/password/forgotpassword/${email}`).then((res)=>{
+    axios.get(`http://51.20.75.252:3000/password/forgotpassword/${email}`).then((res)=>{
         forgotPasswordForm.reset()
         alert(res.data.message)
         window.location.href='../Login/login.html'
