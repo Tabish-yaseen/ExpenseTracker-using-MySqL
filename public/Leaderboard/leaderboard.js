@@ -1,4 +1,4 @@
-axios.get('http://51.20.75.252:3000/premium/showleaderboard').then((res) => {
+axios.get('http://localhost:3000/premium/showleaderboard').then((res) => {
     const leaderboardData = res.data;
 
     const tbody = document.querySelector('#tbody')
@@ -13,4 +13,12 @@ axios.get('http://51.20.75.252:3000/premium/showleaderboard').then((res) => {
         `
         tbody.appendChild(tr);
     }
-})
+}).catch((error) => {
+    if ( error.response.data.error) {
+        
+        alert(error.response.data.error);
+    } else {
+
+        console.error(error);
+    }
+  });

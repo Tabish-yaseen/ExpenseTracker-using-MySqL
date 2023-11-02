@@ -10,7 +10,7 @@ loginForm.addEventListener('submit',(e)=>{
     userpassword:password.value
    }
    
-   axios.post("http://51.20.75.252:3000/user/login",details).then((res)=>{
+   axios.post("http://localhost:3000/user/login",details).then((res)=>{
 
     alert(res.data.message)
     const token=res.data.token
@@ -19,8 +19,7 @@ loginForm.addEventListener('submit',(e)=>{
 
    
      }).catch((err)=>{
-    
-        loginError.innerHTML = `Error: ${err.response.data.error}`
+        alert(err.response.data.error)
 
 
      })

@@ -29,6 +29,9 @@ exports.getURLS=async(req,res)=>{
         const user=req.user
         // console.log(user)
         const downloadedFiles=await  filesDownloaded.findAll({where:{userId:user.id}})
+        if(downloadedFiles.length===0){
+           return res.status(400).json({error:"No Download History Available"})
+        }
         res.status(200).json({downloadedFiles})
 
     }catch(err){

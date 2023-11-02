@@ -1,0 +1,78 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "";
+    opacity: 0.6;
+    content: "";
+    width: 100%;
+    height: 800px;
+    z-index: -1;
+    top: 0px;
+    position: absolute;
+    background-image: url(../img/bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: 44% 166%; */
+    background-position-y: -32px;
+}
+
+#loginform{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+    margin: 30px auto;
+}
+h2 {
+    text-align: center;
+    color: white;
+    margin: 30px;
+    font-weight: bold;
+    font-size: 22px;
+}
+input{
+    border-radius: 9px;
+    width: 410px;
+    margin: 15px;
+    padding: 8px;
+}
+button{
+    margin: 15px auto;
+    display: block;
+    padding: 15px 49px;
+    background: #302d2d;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: 2px solid #ebe2e2;
+    border-radius: 27px;
+    cursor: pointer;
+    outline: none;
+}
+button:hover{
+    background-color: gainsboro;  
+    color: rgb(6, 5, 7); 
+   
+   }
+.dontaforgot a {
+    position: absolute;
+    left: 39%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px;
+    color: rgb(6, 6, 172);     
+}
+.dontaforgot a:hover{
+    color:red;
+}
+input{
+    border-radius: 9px;
+    width: 410px;
+    margin: 15px;
+    padding: 8px;
+}

@@ -1,0 +1,104 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body::before {
+    content: "";
+    opacity: 0.8;
+    content: "";
+    width: 100%;
+    height: 800px;
+    z-index: -1;
+    top: 0px;
+    position: absolute;
+    background-image: url(../img/bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ /* body {
+    background-color: black;
+
+ } */
+
+nav {
+    background-color: #302d2d;
+    padding: 20px
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    list-style: none;
+    padding: 3px 4em;
+    
+}
+li a{
+    columns: white;
+}
+
+
+
+#alreadyaccount {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 65px;
+}
+#alreadyaccount:hover{
+  color: red;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin: 30px;
+}
+h4{
+    font-size: 18px;
+    color: white;
+}
+
+#signupform {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+    margin: 30px auto;
+}
+input{
+    border-radius: 9px;
+    width: 410px;
+    margin: 15px;
+    padding: 8px;
+}
+button{
+    margin: 15px auto;
+    display: block;
+    padding: 15px 49px;
+    background: #302d2d;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    border: 2px solid #ebe2e2;
+    border-radius: 27px;
+    cursor: pointer;
+    outline: none;
+}
+button:hover{
+ background-color: gainsboro;  
+ color: blueviolet; 
+
+}
+a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+}

@@ -1,0 +1,81 @@
+/* Reset some default styles */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles for the navigation bar */
+nav {
+    background-color: grey;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background-color: white;
+    color: grey;
+}
+
+/* Styles for the table */
+table {
+    width: 80%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+thead {
+    background-color: #1e1e1e;
+    color: white;
+    text-align: left;
+}
+
+th {
+    padding: 10px 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+    height: 34px;
+    color: white; /* Set th text color to white */
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #000000;
+    border-radius: 7px;
+    color: white; /* Set td text color to white */
+}
+
+/* Style the anchor within the table */
+td a {
+    text-decoration: underline;
+    color: blue;
+}
+
+/* Styles for the h1 element */
+h1 {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0; /* Add margin to create space between the navigation bar and h1 */
+}
+
+/* Center the h1 element */
+#sectionfortable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}

@@ -1,0 +1,215 @@
+/* Reset some default styles */
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Styles for the top navigation buttons */
+.topbtn {
+    display: flex;
+    background-color: grey;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbtn button {
+    width: 126px;
+    padding: 5px;
+    margin: 2px;
+    color: #0c0a0a;
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.topbtn button:hover {
+    background-color: rgb(14, 16, 18);
+    color: white;
+}
+
+.topleftbtn {
+    display: flex;
+    align-items: center;
+}
+
+.toprightbtn {
+    display: flex;
+    align-items: center;
+}
+
+.premiummember {
+    padding: 5px 20px;
+    font-weight: bold;
+    background-color: white;
+    border: 1px solid #0c0a0a;
+    border-radius: 7px;
+    color: #0c0a0a;
+    cursor: pointer;
+    margin: 2px;
+}
+
+/* Style the premium message differently */
+.premium-member {
+    background-color: #3cc5d3; /* Example background color */
+    border: 1px solid #1a7e89; /* Example border color */
+    color: white; /* Example text color */
+    font-weight: bold;
+    /* Add other styles you want for premium members */
+}
+
+/* Styles for the expense form */
+#expenseform {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: grey;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#expenseform h4 {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    padding: 7px;
+    margin: 5px;
+}
+
+input {
+    border-radius: 9px;
+    width: 400px;
+    margin: 10px;
+    padding: 4px;
+}
+
+#btnaddexpence {
+    margin: 10px;
+    padding: 5px;
+    border-radius: 21px;
+    font-size: 13px;
+    font-weight: bold;
+    background: white;
+    cursor: pointer;
+}
+
+#btnaddexpence:hover {
+    background-color: black;
+    color: white;
+}
+
+#category {
+    width: 239px;
+    margin: 10px;
+    padding: 5px;
+}
+
+label {
+    background-color: grey;
+    color: white;
+    display: inline;
+    padding: 5px;
+    margin: 10px;
+}
+
+#rows {
+    width: auto;
+    padding: 10px;
+    background-color: grey;
+    color: white;
+    text-align: right;
+    border-radius: 0 0 5px 5px;
+}
+
+/* Styles for the table container */
+#sectionfortable {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+/* Styles for the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background-color: grey;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* Styles for the table header (thead) */
+thead {
+    background-color: grey;
+    color: black;
+    text-align: left;
+}
+
+/* Styles for the table header cells (th) */
+th {
+    padding: 10px 15px;
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+    height: 34px;
+}
+
+/* Styles for the table data cells (td) */
+td {
+    padding: 15px;
+    border-bottom: 1px solid #000000;
+    border-radius: 7px;
+    align-items: center;
+}
+
+.delproduct {
+    cursor: pointer;
+    background: black;
+    color: white;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 5px;
+    text-align: center;
+}
+
+.delproduct:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Styles for the pagination button */
+#pagination-button {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+#pagination-button button {
+    margin: 5px;
+}
+
+/* Styles for the download expense button */
+.downloadhistory {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+}
+
+#download {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#download:hover {
+    background-color: white;
+    color: black;
+}

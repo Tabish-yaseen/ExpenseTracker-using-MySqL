@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>signup</title>
+    <link rel="stylesheet" href="signup.css">
+    <link rel="icon" type="image/png" href="../img/favi.png">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a href="signup.html">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </nav>
+    <h1>Welcome to the Expense Tracker</h1>
     <form id="signupform">
-        Enter your name: <input type="text" name="username" class="username" required>
-        Enter your email: <input type="text" name="useremail" class="useremail" required>
-        password: <input type="password" name="password" class="userpassword" required>
+        <h4>Enter your name:</h4>
+        <input type="text" name="username" class="username" required>
+        <h4>Enter your email:</h4>
+        <input type="text" name="useremail" class="useremail" required>
+        <h4>Password:</h4>
+        <input type="password" name="password" class="userpassword" required>
         <button type="submit">Signup</button>
     </form>
-    <a href="../Login/login.html">Already have an account? Log In</a>
-    
-
+    <a href="../Login/login.html" id="alreadyaccount">Already have an account? Log In</a>
     <div id="signuperror"></div>
-
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
     <script src="signup.js"></script>
-    
 </body>
 </html>

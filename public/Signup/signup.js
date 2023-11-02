@@ -15,14 +15,15 @@
             password:userpassword.value
     
         }
-        axios.post('http://51.20.75.252:3000/user/signup',details).then((res)=>{
+        axios.post('http://localhost:3000/user/signup',details).then((res)=>{
     
             window.location.href = '../Login/login.html';
             
             
         }).catch((err)=>{
             console.log(err)
-            signUpErrordiv.innerHTML=err.message
+            alert("An account with this email already exists")
+            // signUpErrordiv.innerHTML=err.message
         })
     })
     

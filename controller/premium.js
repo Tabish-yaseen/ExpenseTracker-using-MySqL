@@ -10,6 +10,9 @@ exports.showLeaderBoard=async(req,res)=>{
 
 
         })
+        if(showLeaderBoardOfUsers.length===0){
+            return res.status(400).json({err:"No Leaderboard Till Now"})
+        }
        
         res.status(200).json(showLeaderBoardOfUsers)
 

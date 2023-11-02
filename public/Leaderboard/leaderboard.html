@@ -4,21 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Leaderboard</title>
+    <link rel="icon" type="image/lpg" href="../img/favi.png">
+    <link rel="stylesheet" href="leaderboard.css">
+
 </head>
 <body>
-    <a href="../Expense/expense.html">Home</a>
-    <a href="../Leaderboard/leaderboard.html">Leaderboard</a>
-    <a href="../Report/report.html">Report</a>
-
+    <nav>
+        <ul>
+    
+            <a href="../Expense/expense.html">Home</a>
+            <a href="../Leaderboard/leaderboard.html">Leaderboard</a>
+            <a href="../Report/report.html">Report</a>
+    
+       
+    </ul>
+    </nav>
+   
+    
+    
+<section>
     <h1>LEADERBOARD</h1>
     <table>
         <thead>
+            
             <th>Position</th>
              <th>Name</th>
              <th>TotalExpenses</th>
+             
         </thead>
         <tbody id="tbody"></tbody>
     </table>
+</section>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
     <script src="leaderboard.js">
