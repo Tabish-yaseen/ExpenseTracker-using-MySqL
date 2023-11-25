@@ -1,7 +1,7 @@
 const sib = require("sib-api-v3-sdk");
 const { v4: uuidv4 } = require('uuid');
-const forgotPassword = require('../model/forgotPasswordRequest');
-const User = require('../model/user');
+const Password = require('../models/password');
+const User = require('../models/user');
 const bcrypt=require('bcryptjs')
 require('dotenv').config();
 
@@ -45,7 +45,7 @@ exports.forgotPassword = async (req, res) => {
       sender,
       to: receiver,
       subject: "Password Reset",
-      textContent: `<a href="http://51.20.75.252:3000/password/resetpassword/${uuid}">Click To Reset password</a>`,
+      textContent: `<a href="http://localhost:3000/password/resetpassword/${uuid}">Click To Reset password</a>`,
     });
 
     res.status(200).json({ message: 'Link to reset password has been sent to your mail' });
@@ -57,7 +57,7 @@ exports.forgotPassword = async (req, res) => {
 exports.resetPassword = async (req, res) => {
   try {
     const uuid = req.params.uuid;
-    const forgotPasswordRequest = await forgotPassword.findOne({ where: { uuid: uuid, isActive: true} });
+    const forgotPasswordRequest = await Password.findOne({ where: { uuid: uuid, isActive: true} });
     
     if (forgotPasswordRequest) {
       // Deactivate the request
@@ -85,7 +85,7 @@ exports.updatePassword=async(req,res)=>{
         const uuid=req.params.uuid
         const newPassword=req.body.password
 
-        const request=await forgotPassword.findOne({where:{uuid:uuid }})
+        const request=await Password.findOne({where:{uuid:uuid }})
 
         if(request){  
         const user=await User.findOne({where:{id:request.userId}})

@@ -18,7 +18,7 @@ dayExpenseShowBtn.addEventListener('click', () => {
      
     tbody.innerHTML=''  
     const token = localStorage.getItem('token');
-    axios.get(`http://51.20.75.252:3000/expense/day-expenses?day=${Day}&month=${Month}&year=${Year}`,{ headers: { "Authorization": token } })
+    axios.get(`http://localhost:3000/expense/day-expenses?day=${Day}&month=${Month}&year=${Year}`,{ headers: { "Authorization": token } })
       .then((res) => {
         
         const expenses=res.data.expenses
@@ -62,7 +62,7 @@ dayExpenseShowBtn.addEventListener('click', () => {
 
     const token = localStorage.getItem('token');
     tbody.innerHTML=''
-    axios.get(`http://51.20.75.252:3000/expense/month-expenses?month=${Month}&year=${Year}`,{ headers: { "Authorization": token } })
+    axios.get(`http://localhost:3000/expense/month-expenses?month=${Month}&year=${Year}`,{ headers: { "Authorization": token } })
       .then((res) => {
         const monthlyTotalAmount=document.querySelector("#monthTotalAmount")
         monthlyTotalAmount.innerHTML=`${res.data.totalAmount}`

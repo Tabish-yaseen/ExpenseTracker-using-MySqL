@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 
-// Routes imported
 const userRoute = require('./routes/user');
 const expenseRoute = require('./routes/expense');
 const purchaseRoute = require('./routes/purchase');
@@ -12,12 +11,12 @@ const passwordRoute = require('./routes/password');
 
 const sequelize = require('./util/database');
 
-// Models imported
-const User = require('./model/user');
-const Expense = require('./model/expense');
-const Order = require('./model/order');
-const ForgotPasswordRequest = require('./model/forgotPasswordRequest');
-const FilesDownloaded = require('./model/filesDownloaded');
+
+const User = require('./models/user');
+const Expense = require('./models/expense');
+const Order = require('./models/order');
+const ForgotPasswordRequest = require('./models/password');
+const FilesDownloaded = require('./models/download');
 
 const app = express();
 
@@ -50,7 +49,7 @@ ForgotPasswordRequest.belongsTo(User);
 User.hasMany(FilesDownloaded);
 FilesDownloaded.belongsTo(User);
 
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ force: false}).then(() => {
     app.listen(3000, () => {
         console.log('Server is running on port 3000');
     });

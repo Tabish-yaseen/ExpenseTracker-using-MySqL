@@ -1,6 +1,6 @@
 
-const Expense=require('../model/expense')
-const User=require('../model/user')
+const Expense=require('../models/expense')
+const User=require('../models/user')
 
 const sequelize=require('../util/database')
 

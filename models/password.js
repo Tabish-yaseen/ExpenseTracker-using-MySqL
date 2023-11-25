@@ -1,7 +1,7 @@
 const{DataTypes}=require('sequelize')
 const sequelize=require('../util/database')
 
-const forgotPassword=sequelize.define('forgotPassword',{
+const password=sequelize.define('password',{
       uuid: {
         type: DataTypes.UUID,
         allowNull: false,
@@ -13,4 +13,4 @@ const forgotPassword=sequelize.define('forgotPassword',{
     })
     
   
-  module.exports = forgotPassword
+  module.exports = password

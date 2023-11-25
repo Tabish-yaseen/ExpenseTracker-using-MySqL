@@ -1,15 +1,15 @@
 const express=require('express')
 const router=express.Router()
-const expenseController=require('../controller/expense')
+const expenseController=require('../controllers/expense')
 const userAuthentication=require('../middleware/auth')
-const downloadController=require('../controller/download')
+const downloadController=require('../controllers/download')
 
 // EXPENSE ROUTES
-router.post('/add-expenses',userAuthentication.authenticate,expenseController.addExpenses)
-router.get('/get-expenses',userAuthentication.authenticate,expenseController.getExpenses )
+router.post('/expense',userAuthentication.authenticate,expenseController.addExpenses)
+router.get('/expenses',userAuthentication.authenticate,expenseController.getExpenses )
 router.get('/day-expenses',userAuthentication.authenticate,expenseController.getDayExpenses)
 router.get('/month-expenses',userAuthentication.authenticate,expenseController.getMonthExpenses)
-router.delete('/delete-expense/:id',userAuthentication.authenticate,expenseController.deleteExpense)
+router.delete('/expense/:id',userAuthentication.authenticate,expenseController.deleteExpense)
 
 
 //Download  Routes

@@ -1,6 +1,6 @@
-const filesDownloaded=require('../model/filesDownloaded')
-const User=require('../model/user')
-const Expense=require('../model/expense')
+const Downloaded=require('../models/download')
+const User=require('../models/user')
+const Expense=require('../models/expense')
 const s3Services=require('../services/s3services')
 const sequelize=require('../util/database')
 
@@ -15,7 +15,7 @@ exports.downloadExpenses=async(req,res)=>{
 
        const fileURL= await s3Services.uploadToS3(stringifiedExpenses,fileName)
 
-       await filesDownloaded.create({URL:fileURL,date:new Date(),userId:user.id})
+       await Downloaded.create({URL:fileURL,date:new Date(),userId:user.id})
 
        res.status(200).json({fileURL})
 
@@ -28,7 +28,7 @@ exports.getURLS=async(req,res)=>{
     try{
         const user=req.user
         // console.log(user)
-        const downloadedFiles=await  filesDownloaded.findAll({where:{userId:user.id}})
+        const downloadedFiles=await  Downloaded.findAll({where:{userId:user.id}})
         if(downloadedFiles.length===0){
            return res.status(400).json({error:"No Download History Available"})
         }

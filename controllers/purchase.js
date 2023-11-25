@@ -1,4 +1,4 @@
-const Order = require('../model/order');
+const Order = require('../models/order');
 const jwt=require('jsonwebtoken')
 const Razorpay = require('razorpay');
 require('dotenv').config();

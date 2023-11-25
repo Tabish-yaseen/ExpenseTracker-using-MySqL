@@ -1,7 +1,7 @@
 const{DataTypes}=require('sequelize')
 const sequelize=require('../util/database')
 
-const filesDownloaded=sequelize.define('filesdownload',{
+const downloaded=sequelize.define('download',{
     id:{
         type:DataTypes.INTEGER,
         primaryKey:true,
@@ -14,4 +14,4 @@ const filesDownloaded=sequelize.define('filesdownload',{
     
 
 })
-module.exports=filesDownloaded
+module.exports=downloaded
